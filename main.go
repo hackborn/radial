@@ -1,8 +1,8 @@
 package main
 
 import (
-	"image/color"
 	"image"
+	"image/color"
 	"image/png"
 	"log"
 	"math"
@@ -14,12 +14,12 @@ func main() {
 	height := width
 	img := image.NewNRGBA(image.Rect(0, 0, width, height))
 
-	center := Ptf{(float64(width)/2.0)-0.5, (float64(height)/2.0)-0.5}
+	center := Ptf{(float64(width) / 2.0) - 0.5, (float64(height) / 2.0) - 0.5}
 	max_d := center.DistanceTo(Ptf{center.X, 0.0})
 
 	for y := 0; y < height; y++ {
 		for x := 0; x < width; x++ {
-			pt := Ptf{float64(x)-0.5, float64(y)-0.5}
+			pt := Ptf{float64(x) - 0.5, float64(y) - 0.5}
 			d := center.DistanceTo(pt)
 			unit := 1.0 - (d / max_d)
 
@@ -30,6 +30,7 @@ func main() {
 			// Alpha
 			var a uint8 = 0
 			if d < max_d {
+				// Antialias the edge pixels.
 				a = toByte(math.Abs(d - max_d))
 			}
 
