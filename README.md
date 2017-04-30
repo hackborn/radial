@@ -2,6 +2,8 @@
 
 Generate a shaded circle. By default, it will create an image 128x128 with transparency outside the circle, and slight shading on the circle so it's white in the center and darker on the edges.
 
+![Example](https://github.com/hackborn/radial/blob/master/readme.png)
+
 ## Compiling
 
 * Download Go (https://golang.org/). I'm on 1.8.1.
