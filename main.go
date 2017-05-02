@@ -43,22 +43,13 @@ func main() {
 		}
 	}
 
-	f, err := os.Create("image.png")
+	err := saveImage("image.png", img)
 	if err != nil {
-		log.Fatal(err)
-	}
-
-	if err := png.Encode(f, img); err != nil {
-		f.Close()
-		log.Fatal(err)
-	}
-
-	if err := f.Close(); err != nil {
 		log.Fatal(err)
 	}
 }
 
-// func toByte() converts a unit float (0-1) to a byte (0-255)
+// func toByte() converts a unit float (0-1) to a byte (0-255).
 func toByte(v float64) uint8 {
 	v = v * 255
 	if v >= 255 {
@@ -67,4 +58,14 @@ func toByte(v float64) uint8 {
 		return uint8(v)
 	}
 	return uint8(0)
+}
+
+// func saveImage() saves thje supplied image to the filename.
+func saveImage(filename string, img *image.NRGBA) error {
+	f, err := os.Create(filename)
+	if err != nil {
+		return err
+	}
+	defer f.Close()
+	return png.Encode(f, img)
 }
