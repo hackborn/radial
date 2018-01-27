@@ -15,23 +15,23 @@ func main() {
 	img := image.NewNRGBA(image.Rect(0, 0, width, height))
 
 	center := Ptf{(float64(width) / 2.0) - 0.5, (float64(height) / 2.0) - 0.5}
-	max_d := center.DistanceTo(Ptf{center.X, 0.0})
+	maxD := center.DistanceTo(Ptf{center.X, 0.0})
 
 	for y := 0; y < height; y++ {
 		for x := 0; x < width; x++ {
 			pt := Ptf{float64(x) - 0.5, float64(y) - 0.5}
 			d := center.DistanceTo(pt)
-			unit := 1.0 - (d / max_d)
+			unit := 1.0 - (d / maxD)
 
 			// Color, with a little shaping
 			shaped := math.Pow(unit, 0.25)
 			b := toByte(shaped)
 
 			// Alpha
-			var a uint8 = 0
-			if d < max_d {
+			var a uint8
+			if d < maxD {
 				// Antialias the edge pixels.
-				a = toByte(math.Abs(d - max_d))
+				a = toByte(math.Abs(d - maxD))
 			}
 
 			img.Set(x, y, color.NRGBA{

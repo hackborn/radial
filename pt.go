@@ -4,12 +4,13 @@ import (
 	"math"
 )
 
-// struct Ptf represents a floating 2D point.
+// Ptf represents a floating 2D point.
 type Ptf struct {
 	X float64
 	Y float64
 }
 
+// DistanceTo provides the distance between points.
 func (p Ptf) DistanceTo(pb Ptf) float64 {
 	dX := p.X - pb.X
 	dY := p.Y - pb.Y
